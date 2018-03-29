@@ -3,7 +3,7 @@ import * as express from "express";
 import {Request, Response} from "express";
 import * as bodyParser from  "body-parser";
 import {createConnection} from "typeorm";
-import {User} from "./entity/User";
+import { User } from "./entity/User";
 
 // create typeorm connection
 createConnection({
@@ -27,7 +27,7 @@ createConnection({
         u.lastName = 'lastn'
         // const user = userRepository.create(req.body);
         await userRepository.save(u);
-        console.log('saved');
+        console.log('savedd');
         // return userRepository.find();
         let us = await  userRepository.find();
         console.log(us);
