@@ -27,7 +27,7 @@ createConnection({
     app.use(cors())
     // register routes
     
-    app.get("/users", async function(req: Request, res: Response) {
+    app.get("/api/users", async function(req: Request, res: Response) {
         let u = new User()
         // u.firstName = 'firstn'
         u.lastName = 'lastn'
@@ -50,20 +50,20 @@ createConnection({
         res.json(us)
     });
     
-    app.get("/users/:id", async function(req: Request, res: Response) {
+    app.get("/api/users/:id", async function(req: Request, res: Response) {
         return userRepository.findOneById(req.params.id);
     });
     
-    app.post("/users", async function(req: Request, res: Response) {
+    app.post("/api/users", async function(req: Request, res: Response) {
         const user = userRepository.create(req.body);
         return userRepository.save(user);
     });
     
-    app.delete("/users/:id", async function(req: Request, res: Response) {
+    app.delete("/api/users/:id", async function(req: Request, res: Response) {
         return userRepository.removeById(req.params.id);
     });
 
-    app.get("/posts", async function(req: Request, res: Response) {
+    app.get("/api/posts", async function(req: Request, res: Response) {
         // let ps = await  mng.find(Post);
         let ps = await  mng.createQueryBuilder(Post, "post")
         .select()
@@ -79,7 +79,7 @@ createConnection({
         res.json(ps)
     });
 
-    app.post("/posts", async function(req: Request, res: Response) {
+    app.post("/api/posts", async function(req: Request, res: Response) {
         let p = new Post()
         p.content = req.body.content
         let last = await mng.createQueryBuilder(User, "user")
@@ -96,7 +96,7 @@ createConnection({
         res.json({ok:'ok'})
     });
 
-    app.get("/posts/:id", async function(req: Request, res: Response) {
+    app.get("/api/posts/:id", async function(req: Request, res: Response) {
         let p = await  mng.createQueryBuilder(Post, "post")
         .select()
         .where("post.id = :id", { id: req.params.id })
@@ -112,10 +112,12 @@ createConnection({
         res.json({post:p, comments:cmts})
     });
 
-    app.post("/comments", async function(req: Request, res: Response) {
+    app.post("/api/comments", async function(req: Request, res: Response) {
         return userRepository.removeById(req.params.id);
     });
     
     // start express server
-    app.listen(3002);
+    app.listen(3001,function () {
+        console.log('------listen',3001,'------');
+    });
 });

@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "pm2 start src/app.ts",
+    "start": "ts-node src/app.ts",
+    "prod": "pm2 start src/app.ts --name exptype",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
