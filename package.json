@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "ts-node src/app.ts",
-    "prod": "pm2 start src/app.ts --name exptype",
+    "prod": "pm2 stop exptype&&pm2 start src/app.ts --name exptype",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
