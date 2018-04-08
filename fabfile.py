@@ -17,19 +17,18 @@ def node():
     # local('cd www&&ls')
     # local('ls')    
     with cd(deploy_to):
-        run('curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash')
-        run('nvm install 8.10.0')
-        run('npm install ts-node typescript nodemon pm2 -g')
-        run('pm2 install typescript ts-node')
+        # run('curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash')
+        # run('nvm install 8.10.0')
+        run('export PATH=$PATH:/root/.nvm/versions/node/v8.10.0/bin&&npm install ts-node typescript nodemon pm2 -g&&pm2 install typescript ts-node')
 
 def deploy():
     deploy_to = '/home/exptype'
     local('git push virmach master')
     with cd(deploy_to):
         run('git pull origin master')
-        run('export PATH=$PATH:/root/.nvm/versions/node/v8.10.0/bin')
-        run('npm install')
-        run('npm start')
+        run('export PATH=$PATH:/root/.nvm/versions/node/v8.10.0/bin&&npm install&&npm run prod')
+        # run('npm install')
+        # run('npm start')
 
 
 # task :log do
